@@ -41,6 +41,7 @@ def reserve_item(request, item_id: int) -> JsonResponse:
         type(item.available_units).__name__,
     )
 
+    item.refresh_from_db(fields=["available_units"])
     item.last_reserved_by = reserved_by
     item.save()
 
